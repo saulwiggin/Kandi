@@ -10,9 +10,18 @@ import com.soywiz.korma.geom.degrees
 import com.soywiz.korma.interpolation.Easing
 
 suspend fun main() = Korge(width = 512, height = 512, bgcolor = Colors["#2b2b2b"]) {
-	val circle = circle(radius = 20.0, color = Colors.GREEN)
-	val rect = solidRect(100.0, 100.0, color = Colors.YELLOW).xy(100, 100)
+	val spriteMap = resource("normal_walk.png").readBitmap()
 
-	val bitmap = resource("korge.png").readBitmap()
-	val image = image(bitmap)
+	val runningAnimation = SpriteAnimation(
+			spriteMap = spriteMap,
+			spriteWidth = 60,
+			spriteHeight = 100,
+			marginTop = 0,
+			marginLeft = 0,
+			columns = 2
+	)
+
+	val sprite = sprite(runningAnimation)
+
+	sprite.playAnimationForDuration(5.seconds)
 }
